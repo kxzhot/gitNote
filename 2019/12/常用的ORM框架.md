@@ -1,4 +1,4 @@
-常用的ORM框架
+# 常用的ORM框架
 ORM就是对象关系匹配，是为了解决面向对象与关系数据库存在的互不匹配的问题。简单来说，就是把关系数据库中的数据转换成面向对象程序中的对象。
 
 常用的ORM框架有Hibernate和MyBatis，也就是ssh组合和ssm组合中的h与m。
@@ -8,6 +8,6 @@ Hibernate对数据库结构提供了完整的封装，实现了POJO对象与数�
 MyBatis通过映射配置文件，将SQL所需的参数和返回的结果字段映射到指定对象，MyBatis不会自动生成SQL，需要自己定义SQL语句，不过更方便对SQL语句进行优化。
 
 总结起来：
-1.Hibernate配置要比mybatis复杂的多，学习成本也比MyBatis高。MyBatis，简单、高效、灵活，但是需要自己维护SQL；
-Hibernate功能强大、全自动、适配不同数据库，但是非常复杂，灵活性稍差。
+1. Hibernate配置要比mybatis复杂的多，学习成本也比MyBatis高。MyBatis，简单、高效、灵活，但是需要自己维护SQL；
+2. Hibernate功能强大、全自动、适配不同数据库，但是非常复杂，灵活性稍差。
 
