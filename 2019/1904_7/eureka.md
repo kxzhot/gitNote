@@ -5,7 +5,8 @@
 	eureka自带web页面，在页面上能看到所有的服务注册情况 和 eureka集群状态。
 	eureka支持服务自己主动下掉自己，请求service的下列地址，可以让服务从eureka上下掉自己，同时service进程也会自己停掉自己。
 curl -H 'Accept:application/json' -X POST localhost:${management.port}/shutdown
-1 Eureka注册中心
+
+# 1 Eureka注册中心
 1.1 需求分析
 在前后端分离架构中，服务层被拆分成了很多的微服务，微服务的信息如何管理？Spring Cloud中提供服务注册中心来管理微服务信息。
 
