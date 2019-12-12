@@ -10,7 +10,7 @@ curl -H 'Accept:application/json' -X POST localhost:${management.port}/shutdown
 ## 1.1 需求分析
 在前后端分离架构中，服务层被拆分成了很多的微服务，微服务的信息如何管理？Spring Cloud中提供服务注册中心来管理微服务信息。
 
-### 为什么 要用注册中心？
+#### 为什么 要用注册中心？
 
 1、微服务数量众多，要进行远程调用就需要知道服务端的ip地址和端口，注册中心帮助我们管理这些服务的ip和端口。
 
@@ -20,8 +20,20 @@ curl -H 'Accept:application/json' -X POST localhost:${management.port}/shutdown
 ### 1.3.1 Eureka介绍
 Spring Cloud Eureka 是对Netflix公司的Eureka的二次封装，它实现了服务治理的功能，Spring Cloud Eureka提
 供服务端与客户端，服务端即是Eureka服务注册中心，客户端完成微服务向Eureka服务的注册与发现。服务端和客户端均采用Java语言编写。下图显示了Eureka Server与Eureka Client的关系：
+![title](../../.local/static/2019/11/4/1576111502571.1576111502587.png)
+1、Eureka Server是服务端，负责管理各各微服务结点的信息和状态。
+2、在微服务上部署Eureka Client程序，远程访问Eureka Server将自己注册在Eureka Server。
+3、微服务需要调用另一个微服务时从Eureka Server中获取服务调用地址，进行远程调用。
 
-作者：striveSmile
-链接：https://www.jianshu.com/p/e2e3ded1f54a
-来源：简书
-著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+1.3.2 Eureka Server搭建
+1、创建xc-govern-center工程：
+包结构：com.xuecheng.govern.center
+2、添加依赖
+在父工程添加：
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Finchley.SR1</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
