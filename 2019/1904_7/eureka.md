@@ -30,10 +30,3 @@ Spring Cloud Eureka 是对Netflix公司的Eureka的二次封装，它实现了�
 包结构：com.xuecheng.govern.center
 2、添加依赖
 在父工程添加：
-<dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>Finchley.SR1</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
