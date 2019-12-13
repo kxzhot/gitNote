@@ -18,3 +18,12 @@ Load Balance负载均衡是用于解决一台机器(一个进程)无法解决所
 ILoadBalance 负载均衡器
 ribbon是一个为客户端提供负载均衡功能的服务，它内部提供了一个叫做ILoadBalance的接口代表负载均衡器的操作，比如有添加服务器操作、选择服务器操作、获取所有的服务器列表、获取可用的服务器列表等等。ILoadBalance的继承关系如下：
 ![title](../../.local/static/2019/11/5/1576196953799.1576196953815.png)
+
+开启负载均衡
+```     
+    @Bean
+    @LoadBalanced
+    RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
+ ```
