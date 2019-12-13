@@ -5,12 +5,9 @@ Load Balance负载均衡是用于解决一台机器(一个进程)无法解决所
 当集群里的1台或者多台服务器down的时候，剩余的没有down的服务器可以保证服务的继续使用
 使用了更多的机器保证了机器的良性使用，不会由于某一高峰时刻导致系统cpu急剧上升
 负载均衡有好几种实现策略，常见的有：
-
-1. 随机 (Random)
-2. 轮询 (RoundRobin)
-3. 一致性哈希 (ConsistentHash)
-4. 哈希 (Hash)
-5. 加权（Weighted）
+|策略名|column2|column3|
+|-|-|-|
+|content1|content2|content3|
 
 ILoadBalance 负载均衡器
 ribbon是一个为客户端提供负载均衡功能的服务，它内部提供了一个叫做ILoadBalance的接口代表负载均衡器的操作，比如有添加服务器操作、选择服务器操作、获取所有的服务器列表、获取可用的服务器列表等等。ILoadBalance的继承关系如下：
