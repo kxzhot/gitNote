@@ -11,7 +11,9 @@ Load Balance负载均衡是用于解决一台机器(一个进程)无法解决所
 |权重轮询策略|WeightedResponseTimeRule|1.根据每个 provider 的响应时间分配一个权重，响应时间越长，权重越小，被选中的可能性越低。2.原理：一开始为轮询策略，并开启一个计时器，每 30 秒收集一次每个 provider 的平均响应时间，当信息足够时，给每个 provider附上一个权重，并按权重随机选择provider，高权越重的 provider会被高概率选中。|
 |随机策略|RandomRule|RandomRule|
 |最少并发数策略|BestAvailableRule|选择正在请求中的并发数最小的 provider，除非这个provider 在熔断中。|
-|在“选定的负载均衡策略”基础上进行重试机制|RetryRule||
+|在“选定的负载均衡策略”基础上进行重试机制|RetryRule|1.“选定的负载均衡策略”这个策略是轮询策略RoundRobinRule2.该重试策略先设定一个阈值时间段，如果在这个阈值时间段内当选择 provider 不成功，则一直尝试采用“选定的负载均衡策略：轮询策略”最后选择一个可用的provider|
+|可用性敏感策略|AvailabilityFilteringRule|过滤性能差的 provider,有 2种：第一种：过滤掉在 eureka 中处于一直连接失败 provider 第二种：过滤掉高并发的 provider|
+|区域敏感性策略|ZoneAvoidanceRule|1.以一个区域为单位考察可用性，对于不可用的区域整个丢弃，从剩下区域中选可用的provider2.如果这个 ip 区域内有一个或多个实例不可达或响应变慢，都会降低该 ip 区域内其他 ip 被选中的权重。|
 
 ILoadBalance 负载均衡器
 ribbon是一个为客户端提供负载均衡功能的服务，它内部提供了一个叫做ILoadBalance的接口代表负载均衡器的操作，比如有添加服务器操作、选择服务器操作、获取所有的服务器列表、获取可用的服务器列表等等。ILoadBalance的继承关系如下：
