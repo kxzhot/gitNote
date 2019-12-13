@@ -6,7 +6,7 @@ Load Balance负载均衡是用于解决一台机器(一个进程)无法解决所
 使用了更多的机器保证了机器的良性使用，不会由于某一高峰时刻导致系统cpu急剧上升
 负载均衡有好几种实现策略，常见的有：
 
-随机 (Random)
+1. 随机 (Random)
 轮询 (RoundRobin)
 一致性哈希 (ConsistentHash)
 哈希 (Hash)
