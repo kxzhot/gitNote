@@ -13,3 +13,6 @@
 
 小孩子才做选择，我全都要，你单独用RDB你会丢失很多数据，你单独用AOF，你数据恢复没RDB来的快，真出什么时候第一时间用RDB恢复，然后AOF做数据补全，真香！冷备热备一起上，才是互联网时代一个高健壮性系统的王道。
 
+
+git remote add origin https://github.com/kxzhot/gitNote.git
+git push -u origin master
