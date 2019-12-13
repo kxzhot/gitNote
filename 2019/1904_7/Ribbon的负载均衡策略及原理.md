@@ -9,7 +9,9 @@ Load Balance负载均衡是用于解决一台机器(一个进程)无法解决所
 |-|-|-|
 |轮询策略（默认）|RoundRobinRule|轮询策略表示每次都顺序取下一个 provider，比如一共有 5 个provider，第 1 次取第 1 个，第 2次取第 2 个，第 3 次取第 3 个，以此类推|
 |权重轮询策略|WeightedResponseTimeRule|1.根据每个 provider 的响应时间分配一个权重，响应时间越长，权重越小，被选中的可能性越低。2.原理：一开始为轮询策略，并开启一个计时器，每 30 秒收集一次每个 provider 的平均响应时间，当信息足够时，给每个 provider附上一个权重，并按权重随机选择provider，高权越重的 provider会被高概率选中。|
-|随机策略|RandomRule||
+|随机策略|RandomRule|RandomRule|
+|最少并发数策略|BestAvailableRule|选择正在请求中的并发数最小的 provider，除非这个provider 在熔断中。|
+|在“选定的负载均衡策略”基础上进行重试机制|RetryRule||
 
 ILoadBalance 负载均衡器
 ribbon是一个为客户端提供负载均衡功能的服务，它内部提供了一个叫做ILoadBalance的接口代表负载均衡器的操作，比如有添加服务器操作、选择服务器操作、获取所有的服务器列表、获取可用的服务器列表等等。ILoadBalance的继承关系如下：
