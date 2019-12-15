@@ -6,27 +6,26 @@
 	eureka支持服务自己主动下掉自己，请求service的下列地址，可以让服务从eureka上下掉自己，同时service进程也会自己停掉自己。
 curl -H 'Accept:application/json' -X POST localhost:${management.port}/shutdown
 
-# 1 Eureka注册中心
-## 1.1 需求分析
-在前后端分离架构中，服务层被拆分成了很多的微服务，微服务的信息如何管理？Spring Cloud中提供服务注册中心来管理微服务信息。
+1、Eureka Server提供服务注册服务，各个节点启动后，会在Eureka Server中注册，这样Server中的服务注册表中将会存储所有可用的服务节点的信息；
 
-#### 为什么 要用注册中心？
+2、Eureka Client是一个Java客户端，用于简化与Eureka Server交互，客户端同时具备一个内置的、使用轮询负载均衡算法的负载均衡器；
 
-1、微服务数量众多，要进行远程调用就需要知道服务端的ip地址和端口，注册中心帮助我们管理这些服务的ip和端口。
+3、在应用启动后，将会向Eureka Server发送心跳（默认周期30s），如果Eureka Server在多个心跳周期没有收到某个节点的心跳，Eureka Server会从服务注册表中把这个服务节点删除（默认为90s）；
 
-2、微服务会实时上报自己的状态，注册中心统一管理这些微服务的状态，将存在问题的服务踢出服务列表，客户端获取到可用的服务进行调用。
+4、Eureka Server之间通过复制的方式完成数据的同步；
 
-## 1.3 Eureka注册中心
-### 1.3.1 Eureka介绍
-Spring Cloud Eureka 是对Netflix公司的Eureka的二次封装，它实现了服务治理的功能，Spring Cloud Eureka提
-供服务端与客户端，服务端即是Eureka服务注册中心，客户端完成微服务向Eureka服务的注册与发现。服务端和客户端均采用Java语言编写。下图显示了Eureka Server与Eureka Client的关系：
-![title](../../.local/static/2019/11/4/1576111502571.1576111502587.png)
-1、Eureka Server是服务端，负责管理各各微服务结点的信息和状态。
-2、在微服务上部署Eureka Client程序，远程访问Eureka Server将自己注册在Eureka Server。
-3、微服务需要调用另一个微服务时从Eureka Server中获取服务调用地址，进行远程调用。
+5、Eureka Client具有缓冲机制，如果Eureka Server全部宕机的情况，客户端依然可以利用缓存的信息消费其他服务API；
 
-1.3.2 Eureka Server搭建
-1、创建xc-govern-center工程：
-包结构：com.xuecheng.govern.center
-2、添加依赖
-在父工程添加：
+6、Eureka region可以理解为地理上的分区，没有具体大小的限制；
+
+7、Eureka zone可以理解为region内具体的机房信息；
+
+8、使用Jersey框架实现自身的Restful HTTP接口，peer之间同步与服务注册通过HTTP协议实现，定时任务（发送心跳、定时清理过期服务、节点同步等）通过JDK自带的Timer实现，内存缓存实现Google的guava实现；
+
+9、当服务注册中心Server检测服务提供者宕机时，在服务中心将服务置为DOWN状态，并将该服务向其他订阅者发布，订阅者更新本地缓存信息；
+
+10、当Eureka Server节点在短时间内丢失过多的客户端时，这个节点会进入自我保护模式，不再注销任何服务；
+
+11、Eureka与Zookeeper区别：分布式系统中不可能同时满足C（一致性）、A（可用性）以及P（分区容错性）。P是分布式系统必须要保证的特性，对此Zookeeper保证的是CP，而Eureka保证的是AP。 
+
+12、Zookeeper：zk会出现这样一种情况当master因为网络故障与其他节点事务联系时，其他节点会重新进行leader选举，问题在于，选举leader的时间太长，且选举期间整个zk集群是不能直接使用的。
