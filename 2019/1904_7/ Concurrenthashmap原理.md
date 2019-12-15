@@ -1,6 +1,5 @@
 # Concurrenthashmap原理
-在java并发包里面， Concurrenthashmap是线程安全的 hashmap，
-通过引入分段锁的概念将一个大的Map拆分成多个小的 Hashtable.在存值和取值
+在java并发包里面， Concurrenthashmap是线程安全的 hashmap，通过引入分段锁的概念将一个大的Map拆分成多个小的 Hashtable.在存值和取值
 得时候通过 key hashcode0来计算key及其对应的值应该放到哪个 Hashtable
 中。默认情况下 Concurrenthashmap会创建16个分段数组集合。
 这样在进行操作的时候如果有3个线程ABC，这时候AB两个线程根据
