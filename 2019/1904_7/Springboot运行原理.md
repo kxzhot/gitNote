@@ -1,6 +1,6 @@
 ## Springboot运行原理
 我们从 springboot项目的的启动类中可以看到最核心的两行代码：
-＠SpringBootapplication和 Springapplication.run方法。
+＠SpringBootApplication和 SpringApplication.run方法。
 #### 在＠SpringBootapplication的内部包含了3个注解
 - 	@Configuration
 - 	@Enableautoconfiguration
