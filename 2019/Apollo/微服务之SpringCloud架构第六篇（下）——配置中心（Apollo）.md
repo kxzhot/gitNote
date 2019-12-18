@@ -229,15 +229,15 @@ eureka:
 5. 打开http://localhost:8070,创建项目，点击提交：
 ![title](../../.local/static/2019/11/3/1576652165399.1576652165406.png)
 
-6 点击进去新建好的Project以后，新增配置，新增后点击发布，发布后如图：
+6. 点击进去新建好的Project以后，新增配置，新增后点击发布，发布后如图：
 ![title](../../.local/static/2019/11/3/1576652204343.1576652204349.png)
 
-7、返回到项目中，在启动类中加入apollo注解：
+7. 返回到项目中，在启动类中加入apollo注解：
 ````
 @EnableApolloConfig
 @Configuration
 ````
-8、创建实体类User，其中@ApolloConfig 注解，会获取上述配置中心默认namespace，也就是application中的配置。
+8. 创建实体类User，其中@ApolloConfig 注解，会获取上述配置中心默认namespace，也就是application中的配置。
 
 @Value注解会将获取到的配置值赋值给对应的变量，如果没有获取到配置，则赋予默认值，如name为佚名、年龄为1，性别为f。
 ````
@@ -314,7 +314,48 @@ public class User {
                 '}';
     }
 }
-————————————————
-版权声明：本文为CSDN博主「leehao_howard」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。
-原文链接：https://blog.csdn.net/pilihaotian/article/details/82958386
 ````
+9. 创建测试类Controller进行测试，其中@ApolloConfigChangeListener下的方法，会检测到配置中心的配置是否有变化，以及变化的类型，一旦检测到变化，便可以根据实际需求进行业务逻辑编写处理。
+````
+package com.example.configclient.controller;
+ 
+import com.ctrip.framework.apollo.model.ConfigChange;
+import com.ctrip.framework.apollo.model.ConfigChangeEvent;
+import com.ctrip.framework.apollo.spring.annotation.ApolloConfigChangeListener;
+import com.example.configclient.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+ 
+@RestController
+@RequestMapping("/config")
+public class ConfigClientController {
+ 
+ 
+    @Autowired
+    private User user;
+    @RequestMapping("/getUserConfig")
+    public String getConfig(){
+       return user.toString();
+    }
+ 
+    /**
+     * @ApolloConfigChangeListener用来自动注册ConfigChangeListener
+     */
+    @ApolloConfigChangeListener
+    private void onChange(ConfigChangeEvent changeEvent) {
+        changeEvent.changedKeys().forEach(key ->{
+            ConfigChange change = changeEvent.getChange(key);
+            System.out.println("config changed - key: "+change.getPropertyName()
+                    +", oldValue: "+change.getOldValue()
+                    +", newValue: "+change.getNewValue()
+                    +", changeType: "+change.getChangeType());
+        });
+    }
+}
+````
+10. 访问：http://localhost:8768/config/getUserConfig
+已经获取到配置中心的值。
+将配置中心的值改变后再发布
+此时后端检测到变化，控制台输出修改前后的值，以及修改操作类型：
