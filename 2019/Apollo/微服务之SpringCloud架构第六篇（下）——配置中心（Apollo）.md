@@ -224,3 +224,97 @@ eureka:
 ````
 
 4. 参考上述第五节，可采用多种方式来设置env环境，本案例在idea开发环境中设置，设置为-Denv=DEV。
+![title](../../.local/static/2019/11/3/1576652108374.1576652108756.png)
+
+5. 打开http://localhost:8070,创建项目，点击提交：
+![title](../../.local/static/2019/11/3/1576652165399.1576652165406.png)
+
+6 点击进去新建好的Project以后，新增配置，新增后点击发布，发布后如图：
+![title](../../.local/static/2019/11/3/1576652204343.1576652204349.png)
+
+7、返回到项目中，在启动类中加入apollo注解：
+````
+@EnableApolloConfig
+@Configuration
+````
+8、创建实体类User，其中@ApolloConfig 注解，会获取上述配置中心默认namespace，也就是application中的配置。
+
+@Value注解会将获取到的配置值赋值给对应的变量，如果没有获取到配置，则赋予默认值，如name为佚名、年龄为1，性别为f。
+````
+package com.example.configclient;
+ 
+import com.ctrip.framework.apollo.Config;
+import com.ctrip.framework.apollo.spring.annotation.ApolloConfig;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+ 
+@Component
+public class User {
+ 
+    @ApolloConfig
+    private Config config;
+    @Value("${name:佚名}")
+    private String name;
+    @Value("${age:1}")
+    private String age;
+    @Value("${sex:f}")
+    private String sex;
+ 
+    public Config getConfig() {
+        return config;
+    }
+ 
+    public void setConfig(Config config) {
+        this.config = config;
+    }
+ 
+    public String getName() {
+        if (config != null) {
+            return config.getProperty("name", "");
+        } else {
+            return name;
+        }
+    }
+ 
+    public void setName(String name) {
+        this.name = name;
+    }
+ 
+    public String getAge() {
+        if (config != null) {
+            return config.getProperty("age", "");
+        } else {
+            return age;
+        }
+    }
+ 
+    public void setAge(String age) {
+        this.age = age;
+    }
+ 
+    public String getSex() {
+        if (config != null) {
+            return config.getProperty("sex", "");
+        } else {
+            return sex;
+        }
+    }
+ 
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+ 
+    @Override
+    public String toString() {
+        return "User{" +
+                "config=" + config +
+                ", name='" + name + '\'' +
+                ", age='" + age + '\'' +
+                ", sex='" + sex + '\'' +
+                '}';
+    }
+}
+————————————————
+版权声明：本文为CSDN博主「leehao_howard」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/pilihaotian/article/details/82958386
+````
