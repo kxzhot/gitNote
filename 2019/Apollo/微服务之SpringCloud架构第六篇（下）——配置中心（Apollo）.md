@@ -200,8 +200,27 @@ Environment可以通过以下3种方式的任意一个配置：
             </plugin>
         </plugins>
     </build>
- 
- 
 </project>
+
 ````
-3. 
+3. application.yml文件，其中app.id对应apollo中的Project，一般和应用name保持一致，meta为config-service的URL配置。
+
+````
+server:
+  port: 8768
+spring:
+  application:
+    name: config-client
+ 
+app:
+  id: CONFIG-CLIENT
+apollo:
+  meta: http://localhost:8080
+ # cacheDir: /opt/data/some-cache-dir #自定义缓存路径
+eureka:
+  client:
+    service-url:
+      default-zone: http://localhost:8761/eureka/
+````
+
+4. 参考上述第五节，可采用多种方式来设置env环境，本案例在idea开发环境中设置，设置为-Denv=DEV。
