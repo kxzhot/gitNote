@@ -64,3 +64,5 @@ fat.meta=http://apollo.fat.xxx.com
 uat.meta=http://apollo.uat.xxx.com
 pro.meta=http://apollo.xxx.com
 ``
+++如果通过以上各种手段都无法获取到Meta Server地址，Apollo最终会fallback到http://apollo.meta作为Meta Server地址++
+
