@@ -85,40 +85,39 @@ Apollo客户端会把从服务端获取到的配置在本地文件系统缓存�
 # 4、自定义缓存路径
 Apollo 1.0.0版本开始支持以下方式自定义缓存路径，按照优先级从高到底分别为：
 1. 通过Java System Property apollo.cacheDir
-    1. 可以通过Java的System Property apollo.cacheDir来指定
-    2. 在Java程序启动脚本中，可以指定-Dapollo.cacheDir=/opt/data/some-cache-dir
-        1. 如果是运行jar文件，需要注意格式是java -
+   1. 可以通过Java的System Property apollo.cacheDir来指定
+   2. 在Java程序启动脚本中，可以指定-Dapollo.cacheDir=/opt/data/some-cache-dir
+       1. 如果是运行jar文件，需要注意格式是java -
  Dapollo.cacheDir=/opt/data/some-cache-dir -jar xxx.jar
-    3. 也可以通过程序指定，如System.setProperty("apollo.cacheDir", "/opt/data/some-cache-dir");
+   3. 也可以通过程序指定，如System.setProperty("apollo.cacheDir", "/opt/data/some-cache-dir");
 2. 通过Spring Boot的配置文件
    1. 可以在Spring Boot的application.properties或bootstrap.properties中指定apollo.cacheDir=/opt/data/some-cache-dir
 3. 通过操作系统的System Environment APOLLO_CACHEDIR
    1. 可以通过操作系统的System Environment APOLLO_CACHEDIR来指定
    2. 注意key为全大写，且中间是_分隔
-通过server.properties配置文件
-可以在server.properties配置文件中指定apollo.cacheDir=/opt/data/some-cache-dir
-对于Mac/Linux，文件位置为/opt/settings/server.properties
-对于Windows，文件位置为C:\opt\settings\server.properties
-注：本地缓存路径也可用于容灾目录，如果应用在所有config service都挂掉的情况下需要扩容，那么也可以先把配置从已有机器上的缓存路径复制到新机器上的相同缓存路径。
+4. 通过server.properties配置文件
+   1. 可以在server.properties配置文件中指定apollo.cacheDir=/opt/data/some-cache-dir
+   2. 对于Mac/Linux，文件位置为/opt/settings/server.properties
+   3. 对于Windows，文件位置为C:\opt\settings\server.properties
+- 注：本地缓存路径也可用于容灾目录，如果应用在所有config service都挂掉的情况下需要扩容，那么也可以先把配置从已有机器上的缓存路径复制到新机器上的相同缓存路径。
 
 **5、 Environment**
 Environment可以通过以下3种方式的任意一个配置：
 
-1.通过Java System Property
-1. 可以通过Java的System Property env来指定环境
-2. 在Java程序启动脚本中，可以指定-Denv=YOUR-ENVIRONMENT
-1如果是运行jar文件，需要注意格式是java -Denv=YOUR-ENVIRONMENT -jar xxx.jar
-3. 注意key为全小写
-2.通过操作系统的System Environment
+1. 通过Java System Property
+   1. 可以通过Java的System Property env来指定环境
+   2. 在Java程序启动脚本中，可以指定-Denv=YOUR-ENVIRONMENT
+      1. 如果是运行jar文件，需要注意格式是java -Denv=YOUR-ENVIRONMENT -jar xxx.jar
+   3. 注意key为全小写
+2. 通过操作系统的System Environment
+   1. 还可以通过操作系统的System Environment ENV来指定
+   2. 注意key为全大写
 
-1. 还可以通过操作系统的System Environment ENV来指定
-2. 注意key为全大写
-通过配置文件
-
-1. 最后一个推荐的方式是通过配置文件来指定env=YOUR-ENVIRONMENT
-2. 对于Mac/Linux，文件位置为/opt/settings/server.properties
-3. 对于Windows，文件位置为C:\opt\settings\server.properties
-4. 文件内容形如：env=DEV
+3. 通过配置文件
+   1. 最后一个推荐的方式是通过配置文件来指定env=YOUR-ENVIRONMENT
+   2. 对于Mac/Linux，文件位置为/opt/settings/server.properties
+   3. 对于Windows，文件位置为C:\opt\settings\server.properties
+   4. 文件内容形如：env=DEV
 
 目前，env支持以下几个值（大小写不敏感）：
 - DEV
