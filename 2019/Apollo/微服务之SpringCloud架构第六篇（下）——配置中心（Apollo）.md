@@ -104,11 +104,11 @@ Apollo 1.0.0版本开始支持以下方式自定义缓存路径，按照优先�
 **5、 Environment**
 Environment可以通过以下3种方式的任意一个配置：
 
-通过Java System Property
-1. 可以通过Java的System Property env来指定环境
-2. 在Java程序启动脚本中，可以指定-Denv=YOUR-ENVIRONMENT
-2.1如果是运行jar文件，需要注意格式是java -Denv=YOUR-ENVIRONMENT -jar xxx.jar
-3.注意key为全小写
+1.通过Java System Property
+1. 1.可以通过Java的System Property env来指定环境
+1. 2.在Java程序启动脚本中，可以指定-Denv=YOUR-ENVIRONMENT
+1. 2.1.如果是运行jar文件，需要注意格式是java -Denv=YOUR-ENVIRONMENT -jar xxx.jar
+1. 3.注意key为全小写
 2.通过操作系统的System Environment
 
 1. 还可以通过操作系统的System Environment ENV来指定
