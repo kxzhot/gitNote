@@ -359,3 +359,8 @@ public class ConfigClientController {
 已经获取到配置中心的值。
 将配置中心的值改变后再发布
 此时后端检测到变化，控制台输出修改前后的值，以及修改操作类型：
+![title]
+再次访问：http://localhost:8768/config/getUserConfig ，发现配置中心修改的值已经同步到客户端了。
+
+补充：
+配置中心的配置会在本地缓存一份，默认地址为：Windows操作系统是 C:/opt/data/具体的Project/config-cache。Mac/Linux为/opt/data/具体的Project/config-cache。
