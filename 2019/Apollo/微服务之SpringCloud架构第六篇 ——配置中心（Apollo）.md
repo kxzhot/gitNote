@@ -1,3 +1,15 @@
+````
+<dependency>
+ 
+    <groupId>com.ctrip.framework.apollo</groupId>
+ 
+    <artifactId>apollo-core</artifactId>
+ 
+    <version>RELEASE/version>
+ 
+</dependency>
+````
+
 Apollo客户端依赖于AppId，Apollo Meta Server等环境信息来工作，所以请确保下面的配置正确：
 **1、 AppId**
 AppId是应用的身份信息，是配置中心的一个项目id，一般和应用名称保持一致，是从服务端获取配置的一个重要信息。
