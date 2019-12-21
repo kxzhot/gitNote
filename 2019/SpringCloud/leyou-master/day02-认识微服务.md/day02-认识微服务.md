@@ -718,7 +718,7 @@ public class User implements Serializable {
 
 ```
 
-属性文件,这里我们采用了yaml语法，而不是properties：
+属性文件,这里我们采用了yml语法，而不是properties：
 
 ```yaml
 server:
