@@ -15,7 +15,8 @@ months ago 和 393MB 取决于镜像的拉取时间和对应版本的大小.
 上述命令的意思如下: 使用交互的形式, 在 名字为 `mongodb` 的容器中实行 `bash`这个命令
 
 4. `mongodb`的使用
-用户的创建和数据库的建立
+
+   1. 用户的创建和数据库的建立
 用户的创建 * 输入以下命令进入 `mongo`
 `mongo`
 * 创建用户
@@ -39,29 +40,27 @@ db.createUser(
  ````
 数据库的建立
 ``use demo;``
-
-mongo 是否正常启动的校验
+  2. mongo 是否正常启动的校验
 先写入一条数据
 
 db.info.save({name: 'test', age: '22'})
 查看写入的数据
-
-db.info.find();
+``db.info.find();``
 结果如下
-
-{ "_id" : ObjectId("5c973b81de96d4661a1c1831"), "name" : "test", "age" : "22" }
+``
+{ "_id" : ObjectId("5c973b81de96d4661a1c1831"), "name" : "test", "age" : "22" }``
 > 其中的`_id`应该会和笔者的不同
 远程连接的开启
 在 `mongodb` 的容器当中
-
+```
 #更新源
-apt-get update
+``apt-get update``
 # 安装 vim
 apt-get install vim
 # 修改 mongo 配置文件
 vim /etc/mongod.conf.orig
+```
 
-将其中的
-
-bindIp: 127.0.0.1
+>将其中的
+`bindIp: 127.0.0.1`
 注释掉`# bindIp: 127.0.0.1` 或者改成`bindIp: 0.0.0.0` 即可开启远程连接
