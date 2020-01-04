@@ -15,10 +15,10 @@ months ago 和 393MB 取决于镜像的拉取时间和对应版本的大小.
 上述命令的意思如下: 使用交互的形式, 在 名字为 `mongodb` 的容器中实行 `bash`这个命令
 
 4. `mongodb`的使用
-
-   1. 用户的创建和数据库的建立
+   1.用户的创建和数据库的建立
 用户的创建 * 输入以下命令进入 `mongo`
 `mongo`
+
 * 创建用户
 ````
 # 进入 admin 的数据库
@@ -38,12 +38,12 @@ db.createUser(
      roles: [{role: "read", db: "demo"}]
  })
  ````
-数据库的建立
+**数据库的建立**
 ``use demo;``
+
   2. mongo 是否正常启动的校验
 先写入一条数据
-
-db.info.save({name: 'test', age: '22'})
+`db.info.save({name: 'test', age: '22'})`
 查看写入的数据
 ``db.info.find();``
 结果如下
