@@ -192,21 +192,22 @@ Eureka专门用于给其他服务注册的称为Eureka Server(服务注册中心
 ````
     register-with-eureka: false     #false表示不向注册中心注册自己。
     fetch-registry: false     #false表示自己端就是注册中心，我的职责就是维护服务实
-````
 例，并不需要去检索服务
-Eureka Client分为服务提供者和服务消费者。
+````
+Eureka Client**分为服务提供者和服务消费者。**
 
-但很可能，某服务既是服务提供者又是服务消费者。
+但很可能，某服务**既是服务提供者又是服务消费者**。
 
-如果在网上看到SpringCloud的某个服务配置没有"注册"到Eureka-Server也不用过于惊讶(但是它是可以获取Eureka服务清单的)
+如果在网上看到SpringCloud的**某个服务配置没有"注册"到Eureka-Server也不用过于惊讶**(但是它是可以获取Eureka服务清单的)
 
-很可能只是作者把该服务认作为单纯的服务消费者，单纯的服务消费者无需对外提供服务，也就无须注册到Eureka中了
-
+很可能只是作者把该服务认作为**单纯的服务消费者**，单纯的服务消费者无需对外提供服务，也就无须注册到Eureka中了
+````
 eureka:
   client:
     register-with-eureka: false  # 当前微服务不注册到eureka中(消费端)
     service-url: 
       defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/  
+````
 下面是Eureka的治理机制：
 
 服务提供者
