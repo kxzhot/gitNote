@@ -342,34 +342,29 @@ Hystrix仪表盘：它主要用来实时监控Hystrix的各项指标信息。通
 我们现在的服务是这样的：
 
 
-除了可以开启单个实例的监控页面之外，还有一个监控端点 /turbine.stream是对集群使用的。从端点的命名中，可以引入Turbine, 通过它来汇集监控信息，并将聚合后的信息提供给 HystrixDashboard 来集中展示和监控。
-
+除了可以开启单个实例的监控页面之外，还有一个监控端点 ``/turbine.stream``是对集群使用的。从端点的命名中，可以引入Turbine, 通过它来**汇集监控信息**，并将聚合后的信息提供给 HystrixDashboard 来集中展示和监控。
+![title](../../.local/static/2020/0/3/1578490310456.1578490310459.png)
 
 举个例子：
-
-3y和女朋友决定去万达玩，去到万达的停车场发现在负一层已经大大写上“负一层已停满，请下负二层，负二层空余停车位还有100个！”
-
-这时，3y就跟女朋友说：“万达停车场是做得挺好的，如果它没有直接告知我负一层已满，可能我就去负一层找位置了，要是一堆人跑去负一层但都找不到车位的话，恐怕就塞死了”。3y接着说：“看停车位的状态也做得不错，在停车位上头有一个感应(监控)，如果是红色就代表已被停了，如果是绿色就说明停车位是空的”。
-
-3y女朋友不屑的说：“你话是真的多”
+- 3y和女朋友决定去万达玩，去到万达的停车场发现在负一层已经大大写上“负一层已停满，请下负二层，负二层空余停车位还有100个！”
+- 这时，3y就跟女朋友说：“万达停车场是做得挺好的，如果它没有**直接**告知我负一层已满，可能我就去负一层找位置了，要是一堆人跑去负一层但都找不到车位的话，恐怕就塞死了”。3y接着说：“看停车位的状态也做得不错，在停车位上头有一个**感应(监控)**，如果是红色就代表已被停了，如果是绿色就说明停车位是空的”。
+- 3y女朋友不屑的说：“你话是真的多”
 
 参考资料：
 
-Hystrix ，为什么说它是每个系统不可或缺的开源框架？https://zhuanlan.zhihu.com/p/34304136
+- Hystrix ，为什么说它是每个系统不可或缺的开源框架？https://zhuanlan.zhihu.com/p/34304136
+- 深入理解Hystrix之文档翻译：https://zhuanlan.zhihu.com/p/28523060
+- 谈谈我对服务熔断、服务降级的理解：-
+https://blog.csdn.net/guwei9111986/article/details/51649240
+- Hystrix几篇文章《青芒》：https://segmentfault.com/u/yedge/articles
 
-深入理解Hystrix之文档翻译：https://zhuanlan.zhihu.com/p/28523060
+# 八、引出Feign
+上面已经介绍了Ribbon和Hystrix了，可以发现的是：他俩作为基础工具类框架**广泛地应用**在各个微服务的实现中。我们会发现对这两个框架的使用**几乎是同时出现**的。
 
-谈谈我对服务熔断、服务降级的理解：https://blog.csdn.net/guwei9111986/article/details/51649240
+为了**简化**我们的开发，Spring Cloud Feign出现了！它基于 Netflix Feign 实现，**整合**了 Spring Cloud Ribbon 与 Spring Cloud Hystrix,  除了整合这两者的强大功能之外，它还提
+供了**声明式的服务调用**(不再通过RestTemplate)。
 
-Hystrix几篇文章《青芒》：https://segmentfault.com/u/yedge/articles
-
-八、引出Feign
-上面已经介绍了Ribbon和Hystrix了，可以发现的是：他俩作为基础工具类框架广泛地应用在各个微服务的实现中。我们会发现对这两个框架的使用几乎是同时出现的。
-
-为了简化我们的开发，Spring Cloud Feign出现了！它基于 Netflix Feign 实现，整合了 Spring Cloud Ribbon 与 Spring Cloud Hystrix,  除了整合这两者的强大功能之外，它还提
-供了声明式的服务调用(不再通过RestTemplate)。
-
-Feign是一种声明式、模板化的HTTP客户端。在Spring Cloud中使用Feign, 我们可以做到使用HTTP请求远程服务时能与调用本地方法一样的编码体验，开发者完全感知不到这是远程方法，更感知不到这是个HTTP请求。
+>Feign是一种声明式、模板化的HTTP客户端。在Spring Cloud中使用Feign, 我们可以做到使用HTTP请求远程服务时能与调用本地方法一样的编码体验，开发者完全感知不到这是远程方法，更感知不到这是个HTTP请求。
 
 下面就简单看看Feign是怎么优雅地实现远程调用的：
 
