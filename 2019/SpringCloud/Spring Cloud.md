@@ -452,47 +452,34 @@ http://123.123.123.127
 
 Spring Cloud Zuul是这样解决上述两个问题的：
 
-SpringCloud Zuul通过与SpringCloud Eureka进行整合，将自身注册为Eureka服务治理下的应用，同时从Eureka中获得了所有其他微服务的实例信息。外层调用都必须通过API网关，使得将维护服务实例的工作交给了服务治理框架自动完成。
+- SpringCloud Zuul通过与SpringCloud Eureka进行整合，将自身注册为Eureka服务治理下的应用，同时从Eureka中获得了所有其他微服务的实例信息。外层调用都必须通过API网关，使得将维护服务实例的工作交给了服务治理框架自动完成。
 
-在API网关服务上进行统一调用来对微服务接口做前置过滤，以实现对微服务接口的拦截和校验。
+- 在API网关服务上进行统一调用来**对微服务接口做前置过滤**，以实现对微服务接口的**拦截和校验**。
 
-Zuul天生就拥有线程隔离和断路器的自我保护功能，以及对服务调用的客户端负载均衡功能。也就是说：Zuul也是支持Hystrix和Ribbon。
-
+Zuul天生就拥有线程隔离和断路器的自我保护功能，以及对服务调用的客户端负载均衡功能。也就是说：**Zuul也是支持Hystrix和Ribbon。**
 关于Zuul还有很多知识点(由于篇幅问题，这里我就不细说了)：
+- 路由匹配(动态路由)
+- 过滤器实现(动态过滤器)
+- 默认会过滤掉Cookie与敏感的HTTP头信息(额外配置)
 
-路由匹配(动态路由)
-
-过滤器实现(动态过滤器)
-
-默认会过滤掉Cookie与敏感的HTTP头信息(额外配置)
-
-9.1可能对Zuul的疑问
+## 9.1可能对Zuul的疑问
 Zuul支持Ribbon和Hystrix，也能够实现客户端的负载均衡。我们的Feign不也是实现客户端的负载均衡和Hystrix的吗？既然Zuul已经能够实现了，那我们的Feign还有必要吗？
-
+![title](../../.local/static/2020/0/3/1578489892189.1578489892214.png)
 
 或者可以这样理解：
-
-zuul是对外暴露的唯一接口相当于路由的是controller的请求，而Ribbonhe和Fegin路由了service的请求
-
-zuul做最外层请求的负载均衡 ，而Ribbon和Fegin做的是系统内部各个微服务的service的调用的负载均衡
+- zuul是对外暴露的唯一接口相当于路由的是controller的请求，而Ribbonhe和Fegin路由了service的请求
+- zuul做最外层请求的负载均衡 ，而Ribbon和Fegin做的是系统内部各个微服务的service的调用的负载均衡
 
 有了Zuul，还需要Nginx吗？他俩可以一起使用吗？
-
-我的理解：Zuul和Nginx是可以一起使用的(毕竟我们的Zuul也是可以搭成集群来实现高可用的)，要不要一起使用得看架构的复杂度了(业务)~~~
+- 我的理解：Zuul和Nginx是可以一起使用的(毕竟我们的Zuul也是可以搭成集群来实现高可用的)，要不要一起使用得看架构的复杂度了(业务)~~~
 
 参考资料：
-
-微服务与API网关（上）: 为什么需要API网关？：http://blog.didispace.com/hzf-ms-apigateway-1/
-
-谈谈 API 网关：https://www.jianshu.com/p/b52a2773e75f
-
-谈谈微服务中的 API 网关（API Gateway）：https://www.cnblogs.com/savorboard/p/api-gateway.html
-
-API网关性能比较：NGINX vs. ZUUL vs. Spring Cloud Gateway ：http://www.360doc.com/content/18/0208/05/46368139_728502763.shtml
-
-谈API网关的背景、架构以及落地方案：http://www.infoq.com/cn/news/2016/07/API-background-architecture-floo
-
-zuul和nginx：https://zhuanlan.zhihu.com/p/37385481
+- 微服务与API网关（上）: 为什么需要API网关？：http://blog.didispace.com/hzf-ms-apigateway-1/
+- 谈谈 API 网关：https://www.jianshu.com/p/b52a2773e75f
+- 谈谈微服务中的 API 网关（API Gateway）：https://www.cnblogs.com/savorboard/p/api-gateway.html
+- API网关性能比较：NGINX vs. ZUUL vs. Spring Cloud Gateway ：http://www.360doc.com/content/18/0208/05/46368139_728502763.shtml
+- 谈API网关的背景、架构以及落地方案：http://www.infoq.com/cn/news/2016/07/API-background-architecture-floo
+- zuul和nginx：https://zhuanlan.zhihu.com/p/37385481
 
 # 十、引出SpringCloud Config
 随着业务的扩展，我们的服务会越来越多，越来越多。每个服务都有自己的配置文件。
