@@ -374,7 +374,7 @@ Feign是一种声明式、模板化的HTTP客户端。在Spring Cloud中使用Fe
 下面就简单看看Feign是怎么优雅地实现远程调用的：
 
 服务绑定：
-
+````
 // value --->指定调用哪个服务
 // fallbackFactory--->熔断器的降级提示
 @FeignClient(value = "MICROSERVICECLOUD-DEPT", fallbackFactory = DeptClientServiceFallbackFactory.class)
@@ -391,6 +391,7 @@ public interface DeptClientService {
     @RequestMapping(value = "/dept/add", method = RequestMethod.POST)
     public boolean add(Dept dept);
 }
+````
 Feign中使用熔断器：
 
 /**
