@@ -132,33 +132,23 @@ CAP理论中的P到底是个什么意思？https://www.zhihu.com/question/541059
 举个可能不太恰当的例子(现实可能不会这么拆分，但意思到位就好了)：
 ![title](../../.local/static/2020/0/3/1578450324327.1578450324335.png)
 
-拆分出多个模块以后，就会出现各种各样的问题，而SpringCloud提供了一整套的解决方案！
+拆分出多个模块以后，就会出现**各种各样的问题**，而SpringCloud提供了**一整套**的解决方案！
+- 注：这些模块是独立成一个子系统的(不同主机)。
 
-注：这些模块是独立成一个子系统的(不同主机)。
-
-SpringCloud的基础功能：
-
-服务治理：Spring  Cloud Eureka
-
-客户端负载均衡：Spring Cloud Ribbon
-
-服务容错保护：Spring  Cloud Hystrix  
-
-声明式服务调用：Spring  Cloud Feign
-
-API网关服务：Spring Cloud Zuul
-
-分布式配置中心：Spring Cloud Config
+SpringCloud的**基础功能**：
+- 服务治理：Spring  Cloud Eureka
+- 客户端负载均衡：Spring Cloud Ribbon
+- 服务容错保护：Spring  Cloud Hystrix  
+- 声明式服务调用：Spring  Cloud Feign
+- API网关服务：Spring Cloud Zuul
+- 分布式配置中心：Spring Cloud Config
 
 SpringCloud的高级功能(本文不讲)：
+- 消息总线：Spring  Cloud Bus
+- 消息驱动的微服务：Spring Cloud Stream
+- 分布式服务跟踪：Spring  Cloud Sleuth
 
-消息总线：Spring  Cloud Bus
-
-消息驱动的微服务：Spring Cloud Stream
-
-分布式服务跟踪：Spring  Cloud Sleuth
-
-五、引出Eureka
+# 五、引出Eureka
 那会出现什么问题呢？？首当其冲的就是子系统之间的通讯问题。子系统与子系统之间不是在同一个环境下，那就需要远程调用。远程调用可能就会想到httpClient，WebService等等这些技术来实现。
 
 既然是远程调用，就必须知道ip地址，我们可能有以下的场景。
