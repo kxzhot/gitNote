@@ -393,7 +393,7 @@ public interface DeptClientService {
 }
 ````
 Feign中使用熔断器：
-
+````
 /**
  * Feign中使用断路器
  * 这里主要是处理异常出错的情况(降级/熔断时服务不可用，fallback就会找到这里来)
@@ -421,10 +421,11 @@ public class DeptClientServiceFallbackFactory implements FallbackFactory<DeptCli
         };
     }
 }
+````
 调用：
 
 
-九、引出Zuul
+# 九、引出Zuul
 基于上面的学习，我们现在的架构很可能会设计成这样：
 
 
