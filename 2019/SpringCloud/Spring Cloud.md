@@ -513,12 +513,9 @@ Spring Cloud Config项目是一个解决分布式系统的配置管理方案。�
 
 SpringCloud Config其他的知识：
 
-在SpringCloud Config的服务端， 对于配置仓库的默认实现采用了Git，我们也可以配置SVN。
-
-配置文件内的信息加密和解密
-
-修改了配置文件，希望不用重启来动态刷新配置，配合Spring  Cloud Bus 使用~
+- 在SpringCloud Config的服务端， 对于配置仓库的默认实现采用了Git，我们也可以配置SVN。
+- 配置文件内的信息加密和解密
+- 修改了配置文件，希望不用重启来动态刷新配置，配合Spring  Cloud Bus 使用~
 
 使用SpringCloud Config可能的疑问：application.yml和 bootstrap.yml区别
-
-https://www.cnblogs.com/BlogNetSpace/p/8469033.html
+- https://www.cnblogs.com/BlogNetSpace/p/8469033.html
