@@ -306,9 +306,9 @@ SpringCloud 在CAP理论是选择了AP的，在Ribbon中还可以配置**重试�
 优秀博文：
 - 撸一撸Spring Cloud Ribbon的原理-负载均衡策略：https://www.cnblogs.com/kongxianghai/p/8477781.html
 
-七、引出Hystrix
+# 七、引出Hystrix
 到目前为止，我们的服务看起来好像挺好的了：能够根据服务名来远程调用其他的服务，可以实现客户端的负载均衡。
-
+![title](../../.local/static/2020/0/3/1578451671259.1578451671275.png)
 
 但是，如果我们在调用多个远程服务时，某个服务出现延迟，会怎么样？？
 
