@@ -271,6 +271,7 @@ final Node<K,V> getNode(int hash, Object key) {
     return null;
 }
 ```
+<img src="https://raw.githubusercontent.com/skyline75489/Heart-First-JavaWeb/master/img/2-library-settings.png" alt="classpath">
 **resize方法**
 进行扩容，会伴随着一次重新hash分配，并且会遍历hash表中所有的元素，是非常耗时的。在编写程序中，要尽量避免resize。
 ```
