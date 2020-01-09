@@ -40,12 +40,13 @@ public class HashMap<K,V> extends AbstractMap<K,V> implements Map<K,V>, Cloneabl
     final float loadFactor;
 }
 ```
-复制代码(1)loadFactor加载因子
+(1)loadFactor加载因子
 loadFactor加载因子是控制数组存放数据的疏密程度，loadFactor越趋近于1，那么   数组中存放的数据(entry)也就越多，也就越密，也就是会让链表的长度增加，load   Factor越小，也就是趋近于0，
-loadFactor太大导致查找元素效率低，太小导致数组的利用率低，存放的数据会很分散。loadFactor的默认值为0.75f是官方给出的一个比较好的临界值。  
+**loadFactor太大导致查找元素效率低，太小导致数组的利用率低，存放的数据会很分散。loadFactor的默认值为0.75f是官方给出的一个比较好的临界值。**  
 (2)threshold
-threshold = capacity * loadFactor，当Size>=threshold的时候，那么就要考虑对数组的扩增了，也就是说，这个的意思就是 衡量数组是否需要扩增的一个标准。
-Node节点类源码:
+**threshold = capacity * loadFactor，当Size>=threshold**的时候，那么就要考虑对数组的扩增了，也就是说，这个的意思就是 **衡量数组是否需要扩增的一个标准。**
+**Node节点类源码:**
+```
 // 继承自 Map.Entry<K,V>
 static class Node<K,V> implements Map.Entry<K,V> {
        final int hash;// 哈希值，存放元素到hashmap中时用来与其他元素hash值比较
@@ -85,7 +86,9 @@ static class Node<K,V> implements Map.Entry<K,V> {
             return false;
         }
 }
-复制代码树节点类源码:
+```
+树节点类源码:
+```
 static final class TreeNode<K,V> extends LinkedHashMap.Entry<K,V> {
         TreeNode<K,V> parent;  // 父
         TreeNode<K,V> left;    // 左
@@ -102,9 +105,11 @@ static final class TreeNode<K,V> extends LinkedHashMap.Entry<K,V> {
                     return r;
                 r = p;
        }
-复制代码LinkedList源码分析
-构造方法
-
+```
+## LinkedList源码分析
+**构造方法**
+![title](../../.local/static/2020/0/4/1578570628974.1578570628978.png)
+```
     // 默认构造函数。
     public More ...HashMap() {
         this.loadFactor = DEFAULT_LOAD_FACTOR; // all   other fields defaulted
@@ -132,7 +137,9 @@ static final class TreeNode<K,V> extends LinkedHashMap.Entry<K,V> {
          this.loadFactor = loadFactor;
          this.threshold = tableSizeFor(initialCapacity);
      }
-复制代码putMapEntries方法：
+```
+putMapEntries方法：
+```
 final void putMapEntries(Map<? extends K, ? extends V> m, boolean evict) {
     int s = m.size();
     if (s > 0) {
@@ -157,7 +164,8 @@ final void putMapEntries(Map<? extends K, ? extends V> m, boolean evict) {
         }
     }
 }
-复制代码put方法
+```
+put方法
 HashMap只提供了put用于添加元素，putVal方法只是给put方法调用的一个方法，并没有提供给用户使用。
 public V put(K key, V value) {
     return putVal(hash(key), key, value, false, true);
