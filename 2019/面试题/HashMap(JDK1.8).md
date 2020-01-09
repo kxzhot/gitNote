@@ -165,8 +165,9 @@ final void putMapEntries(Map<? extends K, ? extends V> m, boolean evict) {
     }
 }
 ```
-put方法
+**put方法**
 HashMap只提供了put用于添加元素，putVal方法只是给put方法调用的一个方法，并没有提供给用户使用。
+```
 public V put(K key, V value) {
     return putVal(hash(key), key, value, false, true);
 }
@@ -238,7 +239,9 @@ final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
     afterNodeInsertion(evict);
     return null;
 } 
-复制代码get方法
+```
+get方法
+```
 public V get(Object key) {
     Node<K,V> e;
     return (e = getNode(hash(key), key)) == null ? null : e.value;
@@ -267,8 +270,10 @@ final Node<K,V> getNode(int hash, Object key) {
     }
     return null;
 }
-复制代码resize方法
+```
+resize方法
 进行扩容，会伴随着一次重新hash分配，并且会遍历hash表中所有的元素，是非常耗时的。在编写程序中，要尽量避免resize。
+```
 final Node<K,V>[] resize() {
     Node<K,V>[] oldTab = table;
     int oldCap = (oldTab == null) ? 0 : oldTab.length;
@@ -349,7 +354,9 @@ final Node<K,V>[] resize() {
     }
     return newTab;
 }
-复制代码HashMap常用方法测试
+```
+## HashMap常用方法测试
+```
 package map;
 
 import java.util.Collection;
@@ -420,9 +427,4 @@ public class HashMapDemo {
 	}
 
 }
-
-
-作者：SnailClimb
-链接：https://juejin.im/post/5ab0568b5188255580020e56
-来源：掘金
-著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+```
